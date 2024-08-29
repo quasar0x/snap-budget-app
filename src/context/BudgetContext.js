@@ -1,17 +1,21 @@
-// src/context/BudgetContext.js
 import React, { createContext, useState } from 'react';
-import { mockBudget, mockExpenses } from '../data/mockData';
 
 export const BudgetContext = createContext();
 
 export const BudgetProvider = ({ children }) => {
-  const [budgets, setBudgets] = useState(mockBudget);
-  const [expenses, setExpenses] = useState(mockExpenses);
+  const [budgets, setBudgets] = useState([]);
+  const [expenses, setExpenses] = useState([]);
 
-  // Add functions to update budgets and expenses as needed
+  const addBudget = (budget) => {
+    setBudgets([...budgets, budget]);
+  };
+
+  const addExpense = (expense) => {
+    setExpenses([...expenses, expense]);
+  };
 
   return (
-    <BudgetContext.Provider value={{ budgets, setBudgets, expenses, setExpenses }}>
+    <BudgetContext.Provider value={{ budgets, expenses, addBudget, addExpense }}>
       {children}
     </BudgetContext.Provider>
   );
